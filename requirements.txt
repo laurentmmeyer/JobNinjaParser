@@ -1,0 +1,2 @@
+-e git+https://github.com/lolobosse/python-markdown2@a3bcae75b49495db3e7c6b8506bdc3ec6b979d59#egg=markdown2
+mistletoe==0.8.1

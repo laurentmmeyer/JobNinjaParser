@@ -1,0 +1,7 @@
+# created by virtualenv automatically
+.run/
+bin/
+lib
+src/markdown2
+pyvenv.cfg
+.idea/
