@@ -20,6 +20,7 @@ class LegacyTestCase(unittest.TestCase):
             # then
             self.assertEqual(old_rendered_html, old_hmtl)
 
+    @unittest.skip("slow")
     def test_that_legacy_is_slow(self):
         # given
         files = []

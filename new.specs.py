@@ -9,21 +9,22 @@ all_test_markdowns = glob.glob("./test-data/*.md")
 
 
 class NewProcessorTestCase(unittest.TestCase):
-    def test_that_new_is_correct(self):
+    def test_correctness(self):
         # given
+        self.maxDiff = None
 
         # when
         for filename in all_test_markdowns:
             with open(filename) as file:
                 new_rendered_html = mistletoe.markdown(file.read(), JobNinjaRenderer)
-            with open(filename.replace(".md", ".html")) as html_file:
+            with open(filename.replace(".md", ".correct.html")) as html_file:
                 old_html = html_file.read()
             # then
+            print("Filename", filename)
             self.assertEqual(new_rendered_html.replace("\n", ""), old_html.replace("\n", ""))
 
-
-
-    def test_that_new_implementation_is_fast(self):
+    @unittest.skip("slow")
+    def test_speed(self):
         # given
         files = []
         for filename in all_test_markdowns:
