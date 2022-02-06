@@ -17,9 +17,8 @@ class LegacyTestCase(unittest.TestCase):
                                                        extras=['replace_email_by_button', 'replace_link_by_button'])
             with open(filename.replace(".md", ".html")) as html_file:
                 old_hmtl = html_file.read()
-
-        # then
-        self.assertEqual(old_rendered_html, old_hmtl)
+            # then
+            self.assertEqual(old_rendered_html, old_hmtl)
 
     def test_that_legacy_is_slow(self):
         # given

@@ -18,9 +18,10 @@ class NewProcessorTestCase(unittest.TestCase):
                 new_rendered_html = mistletoe.markdown(file.read(), JobNinjaRenderer)
             with open(filename.replace(".md", ".html")) as html_file:
                 old_html = html_file.read()
+            # then
+            self.assertEqual(new_rendered_html.replace("\n", ""), old_html.replace("\n", ""))
 
-        # then
-        self.assertEqual(new_rendered_html.replace("\n", ""), old_html.replace("\n", ""))
+
 
     def test_that_new_implementation_is_fast(self):
         # given
