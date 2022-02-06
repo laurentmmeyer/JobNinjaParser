@@ -8,22 +8,38 @@ all_test_markdowns = glob.glob("./test-data/*.md")
 
 class LegacyTestCase(unittest.TestCase):
     def test_that_legacy_is_correct(self):
+        # given
+
+        # when
         for filename in all_test_markdowns:
             with open(filename) as file:
                 old_rendered_html = markdown2.markdown(file.read(),
                                                        extras=['replace_email_by_button', 'replace_link_by_button'])
             with open(filename.replace(".md", ".html")) as html_file:
                 old_hmtl = html_file.read()
+
+        # then
         self.assertEqual(old_rendered_html, old_hmtl)
 
     def test_that_legacy_is_slow(self):
+        # given
+        files = []
+        for filename in all_test_markdowns:
+            with open(filename) as file:
+                files.append(file.read())
+
         start = time.time()
-        for i in range(0, 100):
-            for filename in all_test_markdowns:
-                with open(filename) as file:
-                    markdown2.markdown(file.read(), extras=['replace_email_by_button', 'replace_link_by_button'])
+
+        # when
+        for i in range(0, 1000):
+            for file in files:
+                markdown2.markdown(file, extras=['replace_email_by_button', 'replace_link_by_button'])
+
+        # then
         end = time.time()
-        self.assertTrue(end - start > 1)  # 1 sec
+        duration = end - start
+        message = "It took {}s".format(duration)
+        self.assertTrue(duration > 30, message)  # 1 sec
 
 
 if __name__ == '__main__':
